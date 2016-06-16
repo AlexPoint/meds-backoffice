@@ -21,7 +21,9 @@
   "devDependencies": {
     "babel-cli": "^6.10.1",
     "babel-core": "^6.9.1",
-    "babel-preset-es2015": "^6.9.0"
+    "babel-preset-es2015": "^6.9.0",
+    "install": "^0.8.1",
+    "npm": "^3.9.5"
   },
   "babel": {
     "presets": [
@@ -30,5 +32,9 @@
   },
   "dependencies": {
     "moment": "^2.13.0"
+    "csv": "^1.1.0",
+    "fs": "0.0.2",
+    "iconv-lite": "^0.4.13",
+    "underscore": "^1.8.3"
   }
 }
