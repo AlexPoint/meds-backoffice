@@ -36,6 +36,42 @@ var parserConfigs = [
 				enforcedMonitoring: row[11]
 			}
 		}
+	},
+	{
+		name: 'presentations',
+		fileName: 'CIS_CIP_bdpm.txt',
+		parseRow: function(row){
+			return {
+				cis: row[0],
+				cip7: row[1],
+				name: row[2],
+				status: row[3],
+				marketState: row[4],
+				authDate: row[5],
+				cip13: row[6],
+				publicAgreement: row[7],
+				reimbursementRate: row[8],
+				priceWoDistrib: row[9],
+				price: row[10],
+				distribPrice: row[11]
+			}
+		}
+	},
+	{
+		name: 'compositions',
+		fileName: 'CIS_COMPO_bdpm.txt',
+		parseRow: function(row){
+			return {
+				cis: row[0],
+				name: row[1],
+				substanceCode: row[2],
+				substanceName: row[3],
+				dosing: row[4],
+				refForDosing: row[5],
+				nature: row[6],
+				activeSubstanceToTherapeuticActions: row[7]
+			}
+		}
 	}
 ]
 
@@ -92,4 +128,12 @@ export function parseGenericGroups(callback){
 
 export function parseDrugs(callback){
 	parseFile(parserConfigs[1], callback);
+}
+
+export function parseCompositions(callback){
+	parseFile(parserConfigs[2], callback);
+}
+
+export function parsePresentations(callback){
+	parseFile(parserConfigs[3], callback);
 }
