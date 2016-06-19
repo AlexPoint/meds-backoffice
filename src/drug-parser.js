@@ -2,6 +2,7 @@ import fs from 'fs';
 import csv from 'csv';
 import iconv from 'iconv-lite';
 import _ from 'underscore';
+import moment from 'moment';
 
 var parserConfigs = [
 	{
@@ -9,11 +10,11 @@ var parserConfigs = [
 		fileName: 'CIS_GENER_bdpm.txt',
 		parseRow: function(row){
 			return {
-				id: row[0],
-				name: row[1],
-				cis: row[2],
-				type: row[3],
-				index: row[4]
+				id: parseInt(row[0]),
+				name: row[1].trim(),
+				cis: parseInt(row[2]),
+				type: parseInt(row[3]),
+				index: parseInt(row[4])
 			}
 		}
 	},
@@ -22,18 +23,18 @@ var parserConfigs = [
 		fileName: 'CIS_bdpm.txt',
 		parseRow: function(row){
 			return {
-				cis: row[0],
-				name: row[1],
-				form: row[2],
-				adminRoute: row[3],
-				authStatus: row[4],
-				authType: row[5],
-				marketState: row[6],
-				authDate: row[7],
-				status: row[8],
-				euroAuthNb: row[9],
-				owner: row[10],
-				enforcedMonitoring: row[11]
+				cis: parseInt(row[0]),
+				name: row[1].trim(),
+				form: row[2].trim(),
+				adminRoute: row[3].trim(),
+				authStatus: row[4].trim(),
+				authType: row[5].trim(),
+				marketState: row[6].trim(),
+				authDate: moment(row[7], 'DD/MM/YYYY').toDate(),
+				status: row[8].trim(),
+				euroAuthNb: row[9].trim(),
+				owner: row[10].trim(),
+				enforcedMonitoring: row[11].toLowerCase() == 'oui'
 			}
 		}
 	},
@@ -42,18 +43,18 @@ var parserConfigs = [
 		fileName: 'CIS_CIP_bdpm.txt',
 		parseRow: function(row){
 			return {
-				cis: row[0],
-				cip7: row[1],
-				name: row[2],
-				status: row[3],
-				marketState: row[4],
-				authDate: row[5],
-				cip13: row[6],
-				publicAgreement: row[7],
-				reimbursementRate: row[8],
-				priceWoDistrib: row[9],
-				price: row[10],
-				distribPrice: row[11]
+				cis: parseInt(row[0]),
+				cip7: parseInt(row[1]),
+				name: row[2].trim(),
+				status: row[3].trim(),
+				marketState: row[4].trim(),
+				authDate: moment(row[5], 'DD/MM/YYYY').toDate(),
+				cip13: parseInt(row[6]),
+				publicAgreement: row[7].toLowerCase() == 'oui',
+				reimbursementRate: parseInt(row[8]) / 100,
+				priceWoDistrib: parseFloat(row[9].replace(',', '.')),
+				price: parseFloat(row[10].replace(',', '.')),
+				distribPrice: parseFloat(row[11].replace(',', '.'))
 			}
 		}
 	},
@@ -62,14 +63,14 @@ var parserConfigs = [
 		fileName: 'CIS_COMPO_bdpm.txt',
 		parseRow: function(row){
 			return {
-				cis: row[0],
-				name: row[1],
-				substanceCode: row[2],
-				substanceName: row[3],
-				dosing: row[4],
-				refForDosing: row[5],
-				nature: row[6],
-				activeSubstanceToTherapeuticActions: row[7]
+				cis: parseInt(row[0]),
+				name: row[1].trim(),
+				substanceCode: parseInt(row[2]),
+				substanceName: row[3].trim(),
+				dosing: row[4].trim(),
+				refForDosing: row[5].trim(),
+				nature: row[6].trim(),
+				activeSubstanceToTherapeuticActions: parseInt(row[7])
 			}
 		}
 	}
