@@ -1,6 +1,22 @@
 import _ from 'underscore';
 import * as drugParser from './src/drug-parser';
+import * as drugGroupBuilder from './src/drug-groups-builder';
 
+drugParser.parseGenericGroups(function(genericGroups){
+	drugParser.parseDrugs(function(drugs){
+		drugParser.parseCompositions(function(compositions){
+			drugParser.parsePresentations(function(presentations){
+
+				var groups = drugGroupBuilder.buildGroups(genericGroups, drugs, compositions, presentations);
+
+				console.log(groups.length  + " groups found");
+				console.log(groups[0]);
+			})
+		})
+	})
+})
+
+/*
 drugParser.parseGenericGroups(function(drugGroups){
 	console.log(drugGroups.length + " groups parsed");
 	console.log(drugGroups[0])
@@ -44,3 +60,4 @@ drugParser.parsePresentations(function(presentations){
 	// var activeSubstanceToTherapeuticActionsValues = _.chain(presentations).pluck('activeSubstanceToTherapeuticActions').uniq();
 	// console.log("Distinct activeSubstanceToTherapeuticActions values: " + activeSubstanceToTherapeuticActionsValues);
 })
+*/
