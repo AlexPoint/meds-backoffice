@@ -10,7 +10,7 @@ drugParser.parseGenericGroups(function(genericGroups){
 				var groups = drugGroupBuilder.buildGroups(genericGroups, drugs, compositions, presentations);
 
 				console.log(groups.length  + " groups found");
-				console.log(groups[0]);
+				console.log(JSON.stringify(groups[0], null, 2));
 			})
 		})
 	})
