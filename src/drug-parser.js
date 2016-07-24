@@ -85,18 +85,20 @@ var parseFile = function(config, callback){
 		relax: true
 	})
 	parser.on('readable', function(){
-	  var row;
-	  while(row = parser.read()){
-	  	records.push(config.parseRow(row));
-	  }
+	  	var row;
+	  	while(row = parser.read()){
+	  		records.push(config.parseRow(row));
+	  	}
 	});
 	parser.on('finish', function(){
+		console.log("Done parsing %s", config.fileName)
 		if(typeof(callback) === 'function'){
 			callback(records);
 		}
 	})
 
 	// Launch parsing
+	console.log("Start parsing %s", config.fileName)
 	var input = fs.createReadStream('./data/' + config.fileName)
 		.pipe(iconv.decodeStream('win1252'))
 	    .pipe(iconv.encodeStream('utf8'))
@@ -132,9 +134,9 @@ export function parseDrugs(callback){
 }
 
 export function parseCompositions(callback){
-	parseFile(parserConfigs[2], callback);
+	parseFile(parserConfigs[3], callback);
 }
 
 export function parsePresentations(callback){
-	parseFile(parserConfigs[3], callback);
+	parseFile(parserConfigs[2], callback);
 }

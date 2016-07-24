@@ -8,6 +8,11 @@ drugParser.parseGenericGroups(function(genericGroups){
 		drugParser.parseCompositions(function(compositions){
 			drugParser.parsePresentations(function(presentations){
 
+				console.log("# generic groups: %s", genericGroups.length);
+				console.log("# drugs: %s", drugs.length);
+				console.log("# compositions: %s", compositions.length);
+				console.log("# presentations: %s", presentations.length);
+
 				var groups = drugGroupBuilder.buildGroups(genericGroups, drugs, compositions, presentations);
 				console.log(groups.length  + " groups found");
 				console.log(JSON.stringify(groups[0], null, 2));
